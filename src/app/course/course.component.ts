@@ -27,7 +27,7 @@ export class CourseComponent implements OnInit {
 
   calculatePromedio(courses: Array<Course>) {
     this.promedio = 0;
-    this.courses.forEach(course => {
+    courses.forEach(course => {
       this.promedio += course.seasons;
     });
     this.promedio /= this.courses.length;
