@@ -12,6 +12,7 @@ export class CourseComponent implements OnInit {
 
   constructor(private courseService: CourseService) { }
   courses: Array<Course> = [];
+  promedio: number = 0;
 
   getCourseList(): Array<Course> {
     return dataCourses;
@@ -20,8 +21,18 @@ export class CourseComponent implements OnInit {
   getCourses() {
     this.courseService.getCourses().subscribe(courses => {
       this.courses = courses;
+      this.calculatePromedio(courses);
     });
   }
+
+  calculatePromedio(courses: Array<Course>) {
+    this.promedio = 0;
+    this.courses.forEach(course => {
+      this.promedio += course.seasons;
+    });
+    this.promedio /= this.courses.length;
+  }
+
   ngOnInit() {
     this.getCourses();
   }
